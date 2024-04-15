@@ -10,10 +10,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     
     def create(self, request, *args, **kwargs):
-        email = request.data.get('email')
-        if CustomUser.objects.filter(email= email).exists():
-            raise ValidationError('email already exists')
-        
         response = super().create(request, *args, **kwargs)
         return Response({
             'data': response.data,
